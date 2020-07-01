@@ -40,13 +40,13 @@ public class Miner implements Runnable {
     }
 
     private Block createFirstBlock() {
-        return createBlock(null, 4);
+        return createBlock(null, 3);
     }
 
 
     private int calculateDifficultyNumber(Block previousBlock) {
         if (previousBlock.getGenerationTime() < 5) {
-            return previousBlock.getDifficultyNumber() ;
+            return previousBlock.getDifficultyNumber() + 1;
         } else if (previousBlock.getGenerationTime() > 20) {
             return previousBlock.getDifficultyNumber() - 1;
         } else {

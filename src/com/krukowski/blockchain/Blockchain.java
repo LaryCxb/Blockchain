@@ -12,7 +12,7 @@ public class Blockchain {
     private static ArrayList<Transaction> transactions = new ArrayList<>();
     private static int messageIdentifier = 0;
     private static int maximumIdentifier = 0;
-    private static final Set<Person> users = new HashSet<>();
+    public static final Set<Person> users = new HashSet<>();
 
     public static synchronized ArrayList<Block> fetchBlocks() {
         return readBlocksFromFile("Blocks.txt");
