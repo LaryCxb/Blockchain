@@ -23,7 +23,7 @@ Hash difficulty level of blocks are adjusted (increased or decreased by 1),
 if the generation time of previous block was shorter than 5 seconds or longer than 20 seconds.
 
 ## Getting started
-These instructions will help you to understand how to run and use the application.
+These instructions will help you to run and use the application.
 
 ### Prerequisites
 Things you need to use the program.
