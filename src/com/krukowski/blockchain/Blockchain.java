@@ -7,12 +7,15 @@ import java.util.stream.Collectors;
 
 public class Blockchain {
 
-    public static final int NUMBER_OF_BLOCKS_TO_PRINT = 5;
     private static ArrayList<Block> currentBlocks = new ArrayList<>();
     private static ArrayList<Transaction> transactions = new ArrayList<>();
     private static int messageIdentifier = 0;
     private static int maximumIdentifier = 0;
     public static final Set<Person> users = new HashSet<>();
+
+    public static synchronized void initialReadingBlocks() {
+        currentBlocks = fetchBlocks();
+    }
 
     public static synchronized ArrayList<Block> fetchBlocks() {
         return readBlocksFromFile("Blocks.txt");

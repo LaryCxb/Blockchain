@@ -40,7 +40,7 @@ public class Miner implements Runnable {
     }
 
     private Block createFirstBlock() {
-        return createBlock(null, 3);
+        return createBlock(null, 0);
     }
 
 

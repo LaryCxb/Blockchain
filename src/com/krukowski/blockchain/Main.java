@@ -1,34 +1,29 @@
 package com.krukowski.blockchain;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        Thread[] miners = new Thread[Runtime.getRuntime().availableProcessors()];
+        Thread userService = new Thread(new UserService());
+
+        greet();
+        GenerateKeys.generate();
+
+        Blockchain.initialReadingBlocks();
+
+        userService.start();
+        employMiners(miners);
+
+        waitForUser(userService);
+        dismissMiners(miners);
+    }
+
+    private static void greet() {
         Scanner scanner = new Scanner(System.in);
         printHelloMessage();
         scanner.next();
-
-        Thread[] miners = new Thread[10];
-        Thread userService = new Thread(new UserService());
-        GenerateKeys.generate();
-
-        File file = new File("Blocks.txt");
-        if (file.exists()) {
-            file.delete();
-        }
-
-        userService.start();
-
-        employMiners(miners);
-
-        try {
-            userService.join();
-        } catch (InterruptedException e) {
-            System.out.println("User Thread interrupted");
-        }
-        dismissMiners(miners);
     }
 
     private static void printHelloMessage() {
@@ -49,6 +44,14 @@ public class Main {
             miners[i] = new Thread(new Miner(), "miner" + i);
             Blockchain.users.add(new Person(miners[i].getName()));
             miners[i].start();
+        }
+    }
+
+    private static void waitForUser(Thread userService) {
+        try {
+            userService.join();
+        } catch (InterruptedException e) {
+            System.out.println("User Thread interrupted");
         }
     }
 
