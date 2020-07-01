@@ -9,7 +9,7 @@ public class Miner implements Runnable {
     @Override
     public void run() {
         name = Thread.currentThread().getName();
-        while (Blockchain.getCurrentBlocks().size() < Blockchain.NUMBER_OF_BLOCKS_TO_PRINT) {
+        while (!UserService.stopMining) {
             mine();
         }
     }

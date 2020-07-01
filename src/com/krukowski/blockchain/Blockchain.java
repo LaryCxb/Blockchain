@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class Blockchain {
 
-    public static final int NUMBER_OF_BLOCKS_TO_PRINT = 15;
+    public static final int NUMBER_OF_BLOCKS_TO_PRINT = 5;
     private static ArrayList<Block> currentBlocks = new ArrayList<>();
     private static ArrayList<Transaction> transactions = new ArrayList<>();
     private static int messageIdentifier = 0;

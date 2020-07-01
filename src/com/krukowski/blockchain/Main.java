@@ -1,6 +1,7 @@
 package com.krukowski.blockchain;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -22,10 +23,12 @@ public class Main {
 
         employMiners(miners);
 
-        while (Blockchain.getCurrentBlocks().size() < Blockchain.NUMBER_OF_BLOCKS_TO_PRINT) {
+        try {
+            userService.join();
+        } catch (InterruptedException e) {
+            System.out.println("User Thread interrupted");
         }
-
-        System.exit(0);
+        dismissMiners(miners);
     }
 
     private static void printHelloMessage() {
@@ -37,8 +40,8 @@ public class Main {
                 "by writing transaction orders in following form:\n" +
                 "<NameOfSender> sends <Number> VC to <NameOfReceiver>\n" +
                 "\nBlock will be printed, once it is found, even if no transactions are ordered.\n" +
-                "There is limit of 15 blocks.\n" +
-                "\nTo start generator type anything and press Enter.");
+                "\nTo start generator type anything and press Enter.\n" +
+                "To exit program type exit and press Enter.\n");
     }
 
     private static void employMiners(Thread[] miners) {
@@ -47,6 +50,16 @@ public class Main {
             Blockchain.users.add(new Person(miners[i].getName()));
             miners[i].start();
         }
+    }
+
+    private static void dismissMiners(Thread[] miners) {
+        Arrays.stream(miners).forEach(miner -> {
+            try {
+                miner.join();
+            } catch (InterruptedException e) {
+                System.out.println("InterruptedException!");
+            }
+        });
     }
 }
 
