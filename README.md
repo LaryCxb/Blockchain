@@ -37,12 +37,7 @@ Files from the repository
 3. Build and Run program
 
 ## Built with
-The application is written in Java, with use of:
-* Multithreading - used for faster blocks generating
-* Serialization - to serialize and deserialize blocks and writing them to file
-* Asymmetric cryptography - to sign transactions, and verify them 
-* Streams
-* Lambdas
+The application is written in Java, with use of Java 8 features such as streams and lambdas.
 
 ## Author
 Przemysław Krukowski
